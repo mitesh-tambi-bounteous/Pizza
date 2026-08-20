@@ -1,0 +1,391 @@
+{
+  "frame": {
+    "file_key": "Kzae8FDEX2i6bB6tcai7JX",
+    "node_id": "13:4",
+    "name": "menu-page",
+    "node_type": "FRAME"
+  },
+  "artboards": [
+    {
+      "id": "13:4",
+      "name": "menu-page",
+      "figma_type": "FRAME",
+      "kind": "screen",
+      "bounds": { "x": 0, "y": 0, "width": 1440, "height": 2432 },
+      "role": "Single desktop screen for the pizzeria's public menu: header nav, hero, category filter row, 3x3 menu grid, a floating cart-summary bar, and footer. The linked node is already a single FRAME (not a CANVAS with multiple siblings), so there is exactly one artboard to review, not several."
+    }
+  ],
+  "resolved_decisions": [],
+  "tokens": {
+    "colors": {
+      "brand-red": "#C82D25",
+      "ink": "#151212",
+      "cream-bg": "#FCFAF6",
+      "surface-card": "#FFFFFF",
+      "card-border": "#EBE7DF",
+      "muted-text": "#6B6661",
+      "category-classic-green": "#2A7043",
+      "white": "#FFFFFF",
+      "on-dark-muted-line": "rgba(255,255,255,0.12)",
+      "on-dark-copyright": "rgba(255,255,255,0.6)",
+      "header-cart-btn-bg": "rgba(255,255,255,0.10)"
+    },
+    "font_families": {
+      "display": "Fraunces",
+      "body": "Geist"
+    },
+    "font_sizes": [12, 13, 14, 15, 16, 18, 20, 22, 24, 48],
+    "font_weights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "radii": {
+      "logo-badge": 20,
+      "filter-pill": 8,
+      "card": 16,
+      "cart-icon-btn": 24,
+      "sticky-cart-bar": 16
+    },
+    "notes": "Colors/sizes distilled from node fills+text styles across the tree; the frame's own `tokens` block (colors + font_sizes) confirms this exact set with no extras found."
+  },
+  "component_map": [
+    {
+      "figma_node": "13:5",
+      "artboard_id": "13:4",
+        "code_component": "SiteHeader",
+      "status": "proposed_new",
+      "props": { "cartCount": 3, "eta": "30 mins", "activeNavItem": "Our Menu" },
+      "notes": "Fixed/top header bar: logo lockup, nav-links, delivery ETA + cart icon button. Composes LogoMark, NavLinks and CartButton below."
+    },
+    {
+      "figma_node": "13:7",
+      "artboard_id": "13:4",
+      "code_component": "LogoMark",
+      "status": "proposed_new",
+      "props": { "letter": "F", "variant": "badge" },
+      "notes": "Red rounded-square badge with a single serif letter; reused identically in the footer (13:203) — see notes there."
+    },
+    {
+      "figma_node": "13:9",
+      "artboard_id": "13:4",
+      "code_component": "SiteWordmark",
+      "status": "proposed_new",
+      "props": { "text": "Forno Rosso", "size": "header" },
+      "notes": "Fraunces SemiBold 24px, white on dark header. Reused at 22px in the footer (13:205)."
+    },
+    {
+      "figma_node": "13:10",
+      "artboard_id": "13:4",
+      "code_component": "NavLinks",
+      "status": "proposed_new",
+      "props": { "items": ["Home", "Our Menu", "Cart"], "active": "Our Menu" },
+      "notes": "Active item (Our Menu) is brand-red with a 2px underline rectangle (13:15); inactive items are white Geist Medium."
+    },
+    {
+      "figma_node": "13:18",
+      "artboard_id": "13:4",
+      "code_component": "HeaderCartControl",
+      "status": "proposed_new",
+      "props": { "eta": "Estimated delivery: 30 mins", "cartCount": 3 },
+      "notes": "Groups the ETA text (green '30 mins' span implied by PNG) with the CartButton (13:20)."
+    },
+    {
+      "figma_node": "13:20",
+      "artboard_id": "13:4",
+      "code_component": "CartButton",
+      "status": "proposed_new",
+      "props": { "count": 3, "icon": "shopping-cart" },
+      "notes": "Circular translucent-white button (10% opacity fill, 24px radius) with a cart glyph and item-count badge. The cart vector (13:22) is a generic outline icon, not an exported bitmap — implement as inline SVG/icon component, not an asset."
+    },
+    {
+      "figma_node": "13:24",
+      "artboard_id": "13:4",
+      "code_component": "PageHero",
+      "status": "proposed_new",
+      "props": { "title": "Browse Our Oven Menu", "subtitle": "Every order is fired individually and packed inside heated thermal backpacks to guarantee your pizza arrives fresh." },
+      "notes": "Centered hero on cream background; title is Fraunces Bold 48px, subtitle Geist Regular 16px muted, center-aligned."
+    },
+    {
+      "figma_node": "13:27",
+      "artboard_id": "13:4",
+      "code_component": "CategoryFilterRow",
+      "status": "proposed_new",
+      "props": {
+        "categories": ["All", "Classic", "Specialty", "Vegetarian", "Sides & Drinks"],
+        "active": "All"
+      },
+      "notes": "Row of pill buttons in a light cream pill-track. Composes CategoryFilterPill (below) once per category. No node shows a hover/disabled state for pills — see open question `filter-interaction-states`."
+    },
+    {
+      "figma_node": "13:29",
+      "artboard_id": "13:4",
+      "code_component": "CategoryFilterPill",
+      "status": "proposed_new",
+      "props": { "label": "All", "active": true },
+      "notes": "Active state: brand-red fill (#C82D25), white Geist SemiBold 14px text, 8px radius."
+    },
+    {
+      "figma_node": "13:31",
+      "artboard_id": "13:4",
+      "code_component": "CategoryFilterPill",
+      "status": "proposed_new",
+      "props": { "label": "Classic", "active": false },
+      "notes": "Reuses the CategoryFilterPill proposed at 13:29. Inactive state: no fill, muted Geist Medium 14px text (#6B6661)."
+    },
+    {
+      "figma_node": "13:33",
+      "artboard_id": "13:4",
+      "code_component": "CategoryFilterPill",
+      "status": "proposed_new",
+      "props": { "label": "Specialty", "active": false },
+      "notes": "Reuses the CategoryFilterPill proposed at 13:29."
+    },
+    {
+      "figma_node": "13:35",
+      "artboard_id": "13:4",
+      "code_component": "CategoryFilterPill",
+      "status": "proposed_new",
+      "props": { "label": "Vegetarian", "active": false },
+      "notes": "Reuses the CategoryFilterPill proposed at 13:29."
+    },
+    {
+      "figma_node": "13:37",
+      "artboard_id": "13:4",
+      "code_component": "CategoryFilterPill",
+      "status": "proposed_new",
+      "props": { "label": "Sides & Drinks", "active": false },
+      "notes": "Reuses the CategoryFilterPill proposed at 13:29."
+    },
+    {
+      "figma_node": "13:39",
+      "artboard_id": "13:4",
+      "code_component": "MenuGrid",
+      "status": "proposed_new",
+      "props": { "columns": 3, "itemCount": 9 },
+      "notes": "3x3 responsive grid of MenuItemCard, rows at 13:40/13:89/13:138."
+    },
+    {
+      "figma_node": "13:41",
+      "artboard_id": "13:4",
+      "code_component": "MenuItemCard",
+      "status": "proposed_new",
+      "props": {
+        "name": "Classic Margherita",
+        "category": "Classic",
+        "price": "$14.50",
+        "description": "San Marzano sauce, fresh buffalo mozzarella, fresh basil, extra virgin olive oil.",
+        "categoryColor": "green"
+      },
+      "notes": "White card, 16px radius, 1px #EBE7DF border. Composes a MenuItemImage (13:43, asset file=figma-asset-13-43-menu-grid.png, css_object_fit=cover), title/category/price row, description, and an AddToCartButton (13:52). Category label color for 'Classic'/'Specialty' items is green (#2A7043) in this card; see open question `category-tag-color-mapping` for whether the color is fixed-per-category or a one-off."
+    },
+    {
+      "figma_node": "13:43",
+      "artboard_id": "13:4",
+      "code_component": "MenuItemImage",
+      "status": "proposed_new",
+      "props": { "alt": "Classic Margherita" },
+      "notes": "asset file=./.arc/designs/figma-asset-13-43-menu-grid.png, css_object_fit=cover. Reused for every card; each instance takes a different asset file (see per-node list below)."
+    },
+    {
+      "figma_node": "13:52",
+      "artboard_id": "13:4",
+      "code_component": "AddToCartButton",
+      "status": "proposed_new",
+      "props": { "label": "Add to Cart", "icon": "shopping-cart" },
+      "notes": "Full-width dark (#151212) button with white Geist SemiBold 14px label and cart icon; repeated identically on every MenuItemCard."
+    },
+    {
+      "figma_node": "13:57",
+      "artboard_id": "13:4",
+      "code_component": "MenuItemCard",
+      "status": "proposed_new",
+      "props": { "name": "Diavola", "category": "Specialty", "price": "$16.50", "description": "Spicy calabrian salami, fresh mozzarella, tomato base, organic chili oil, fresh basil.", "categoryColor": "green" },
+      "notes": "Reuses the MenuItemCard proposed at 13:41. Image asset: figma-asset-13-59-menu-grid.png (node 13:59, css_object_fit=cover)."
+    },
+    {
+      "figma_node": "13:73",
+      "artboard_id": "13:4",
+      "code_component": "MenuItemCard",
+      "status": "proposed_new",
+      "props": { "name": "Funghi e Tartufo", "category": "Specialty", "price": "$18.00", "description": "Wild porcini and cremini mushrooms, truffle-infused olive oil, white mozzarella base." },
+      "notes": "Reuses the MenuItemCard proposed at 13:41. Image asset: figma-asset-13-75-menu-grid.png (node 13:75, css_object_fit=cover)."
+    },
+    {
+      "figma_node": "13:90",
+      "artboard_id": "13:4",
+      "code_component": "MenuItemCard",
+      "status": "proposed_new",
+      "props": { "name": "Prosciutto e Rucola", "category": "Specialty", "price": "$19.00", "description": "Prosciutto di Parma, wild arugula, shaved parmigiano-reggiano, sweet balsamic glaze." },
+      "notes": "Reuses the MenuItemCard proposed at 13:41. Image asset: figma-asset-13-92-menu-grid.png (node 13:92, css_object_fit=cover)."
+    },
+    {
+      "figma_node": "13:106",
+      "artboard_id": "13:4",
+      "code_component": "MenuItemCard",
+      "status": "proposed_new",
+      "props": { "name": "Quattro Formaggi", "category": "Classic", "price": "$16.00", "description": "Buffalo mozzarella, gorgonzola dolce, fresh ricotta, aged parmigiano-reggiano." },
+      "notes": "Reuses the MenuItemCard proposed at 13:41. Image asset: figma-asset-13-108-menu-grid.png (node 13:108, css_object_fit=cover)."
+    },
+    {
+      "figma_node": "13:122",
+      "artboard_id": "13:4",
+      "code_component": "MenuItemCard",
+      "status": "proposed_new",
+      "props": { "name": "Verdure Grigliate", "category": "Vegetarian", "price": "$15.00", "description": "Grilled bell peppers, eggplant, roasted zucchini, marinated cherry tomatoes, herb pesto." },
+      "notes": "Reuses the MenuItemCard proposed at 13:41. Image asset: figma-asset-13-124-menu-grid.png (node 13:124, css_object_fit=cover). Category tag 'Vegetarian' renders green in the PNG same as Classic/Specialty — supports the single-flat-tag-color assumption in `category-tag-color-mapping`."
+    },
+    {
+      "figma_node": "13:139",
+      "artboard_id": "13:4",
+      "code_component": "MenuItemCard",
+      "status": "proposed_new",
+      "props": { "name": "Calzone Rosso", "category": "Classic", "price": "$17.00", "description": "Folded sourdough stuffed with ricotta, spicy salami, crushed tomatoes, fresh mozzarella." },
+      "notes": "Reuses the MenuItemCard proposed at 13:41. Image asset: figma-asset-13-141-menu-grid.png (node 13:141, css_object_fit=cover)."
+    },
+    {
+      "figma_node": "13:155",
+      "artboard_id": "13:4",
+      "code_component": "MenuItemCard",
+      "status": "proposed_new",
+      "props": { "name": "Rosemary Garlic Focaccia", "category": "Sides & Drinks", "price": "$8.50", "description": "Fresh baked warm sourdough focaccia, woodfired rosemary, garlic salt, olive oil." },
+      "notes": "Reuses the MenuItemCard proposed at 13:41. Image asset: figma-asset-13-157-menu-grid.png (node 13:157, css_object_fit=cover)."
+    },
+    {
+      "figma_node": "13:171",
+      "artboard_id": "13:4",
+      "code_component": "MenuItemCard",
+      "status": "proposed_new",
+      "props": { "name": "Tiramisu della Casa", "category": "Sides & Drinks", "price": "$9.00", "description": "Traditional espresso-soaked ladyfingers, whipped farm mascarpone, pure cocoa dust." },
+      "notes": "Reuses the MenuItemCard proposed at 13:41. Image asset: figma-asset-13-173-menu-grid.png (node 13:173, css_object_fit=cover). A dessert filed under 'Sides & Drinks' — see open question `tiramisu-category`."
+    },
+    {
+      "figma_node": "13:187",
+      "artboard_id": "13:4",
+      "code_component": "CartSummaryBar",
+      "status": "proposed_new",
+      "props": { "itemLabel": "3 Pizzas selected", "total": "$53.50", "ctaLabel": "Checkout" },
+      "notes": "Dark rounded (16px) floating bar with bag icon, item count, total, and a red Checkout pill. In the flat Figma frame it is positioned at y=2216 which sits BEHIND the footer in paint order and is not visible in the rendered PNG (confirmed by pixel-sampling that region: it shows plain footer background). This only makes sense as a fixed/sticky bottom-of-viewport bar shown while the cart has items — see blocking open question `sticky-cart-bar-behavior`."
+    },
+    {
+      "figma_node": "13:199",
+      "artboard_id": "13:4",
+      "code_component": "SiteFooter",
+      "status": "proposed_new",
+      "props": {},
+      "notes": "Dark full-width footer: brand column + two info columns, a divider line, and a bottom legal row. Composes FooterBrandColumn, FooterInfoColumn (x2) and FooterLegalRow."
+    },
+    {
+      "figma_node": "13:201",
+      "artboard_id": "13:4",
+      "code_component": "FooterBrandColumn",
+      "status": "proposed_new",
+      "props": { "tagline": "Artisanal wood-fired sourdough pizzas crafted with 48-hour fermented dough and imported San Marzano ingredients. Delivered fresh and piping hot." },
+      "notes": "Composes the same LogoMark/SiteWordmark pairing as the header (at footer scale, 36px badge / 22px wordmark) plus a SocialIconRow (13:207)."
+    },
+    {
+      "figma_node": "13:207",
+      "artboard_id": "13:4",
+      "code_component": "SocialIconRow",
+      "status": "proposed_new",
+      "props": { "icons": ["instagram", "facebook", "twitter"] },
+      "notes": "Three circular translucent-white icon buttons; icons are generic outline glyphs (inline SVG), not exported bitmaps — no matching entries in figma-assets.json."
+    },
+    {
+      "figma_node": "13:217",
+      "artboard_id": "13:4",
+      "code_component": "FooterInfoColumn",
+      "status": "proposed_new",
+      "props": {
+        "heading": "Kitchen Hours",
+        "rows": [
+          { "label": "Monday - Thursday", "value": "12:00 PM - 10:00 PM" },
+          { "label": "Friday - Saturday", "value": "12:00 PM - 11:30 PM" },
+          { "label": "Sunday", "value": "1:00 PM - 9:30 PM" }
+        ]
+      },
+      "notes": "Uppercase Fraunces SemiBold heading + stacked label/value rows."
+    },
+    {
+      "figma_node": "13:229",
+      "artboard_id": "13:4",
+      "code_component": "FooterInfoColumn",
+      "status": "proposed_new",
+      "props": {
+        "heading": "Pizzeria Location",
+        "address": "842 Rione Monti, Sourdough Avenue, Suite 100",
+        "phoneLabel": "Delivery: (555) 392-7677",
+        "emailLabel": "Email: ciao@fornorosso.pizza"
+      },
+      "notes": "Reuses the FooterInfoColumn proposed at 13:217, with a free-text body slot instead of the label/value rows."
+    },
+    {
+      "figma_node": "13:236",
+      "artboard_id": "13:4",
+      "code_component": "FooterDivider",
+      "status": "proposed_new",
+      "props": {},
+      "notes": "1px hairline, 12% opacity white, full column width."
+    },
+    {
+      "figma_node": "13:237",
+      "artboard_id": "13:4",
+      "code_component": "FooterLegalRow",
+      "status": "proposed_new",
+      "props": {
+        "copyright": "© 2026 Forno Rosso Pizzeria. All rights reserved.",
+        "links": ["Privacy Policy", "Delivery Terms"]
+      },
+      "notes": "Copyright + two legal links, both at 60% opacity white."
+    }
+  ],
+  "excluded": [
+    {
+      "node": "N/A (whole-frame check)",
+      "reason": "No OS/device chrome, browser mockup frame, status bar, notch, or home-indicator scaffolding was found anywhere in the tree — this is a plain desktop web frame (1440x2432) with no simulated device bezel, so nothing needed exclusion on that basis. Listed here explicitly per instructions, since the absence itself is a checked fact, not an omission."
+    }
+  ],
+  "open_questions": [
+    {
+      "id": "sticky-cart-bar-behavior",
+      "topic": "CartSummaryBar (13:187) positioning",
+      "detail": "The cart-summary node sits at y=2216, painted BEHIND the footer (footer starts at y=1956 and is a later, higher z sibling), so it is invisible in the rendered PNG at its literal Figma coordinates — confirmed by sampling that pixel region, which shows plain footer background, not the bar. A static-flow placement there would visually hide the bar behind the footer, which cannot be the intent of a 'cart summary' the shopper needs to see and act on.",
+      "arc_assumption": "Implement CartSummaryBar as a fixed-position bar pinned to the bottom of the viewport (visible over page content while scrolling), shown whenever the cart has at least one item, rather than as a bar living in the normal document flow at its literal Figma y-offset.",
+      "blocking": true,
+      "options": [
+        { "id": "fixed-viewport-bottom", "label": "Fixed to viewport bottom while cart has items — matches typical checkout-bar UX and explains why Figma parked it off in unused canvas space" },
+        { "id": "static-in-flow", "label": "Static, in-flow element placed exactly where drawn (behind/above footer per stacking order) — reproduces the frame literally, but would be hidden from users in the current stacking order" }
+      ],
+      "assumed_option": "fixed-viewport-bottom"
+    },
+    {
+      "id": "category-tag-color-mapping",
+      "topic": "MenuItemCard category tag color",
+      "detail": "Every category tag observed (Classic, Specialty, Vegetarian, Sides & Drinks) renders in the same green (#2A7043) in both the node fills and the PNG — there is no per-category color variation despite 4 distinct category names, and no red/other-hued tag appears anywhere in the grid to test a second mapping.",
+      "arc_assumption": "Treat the category tag as a single flat 'muted-success-green' style applied to all categories, not a category-to-color lookup table, since no evidence of variation exists in this frame.",
+      "blocking": false
+    },
+    {
+      "id": "tiramisu-category",
+      "topic": "Tiramisu della Casa filed under 'Sides & Drinks'",
+      "detail": "The dessert 'Tiramisu della Casa' (13:171) is tagged 'Sides & Drinks' rather than a dedicated 'Desserts' category. The filter row (13:27) only offers All/Classic/Specialty/Vegetarian/Sides & Drinks, so this is consistent with the available filters, just a possibly-loose content grouping.",
+      "arc_assumption": "Keep the content as authored (category = 'Sides & Drinks') since it is consistent with the filter set actually drawn; not treated as a build defect.",
+      "blocking": false
+    },
+    {
+      "id": "filter-interaction-states",
+      "topic": "CategoryFilterPill hover/focus/disabled states",
+      "detail": "The frame only shows one active pill ('All') and four inactive pills at rest — no hover, focus-visible, or disabled visual is drawn for any pill, and no empty-state is drawn for a category with zero matching items.",
+      "arc_assumption": "Implement standard hover/focus affordances (e.g. subtle background tint on hover, visible focus ring) using the existing inactive/active token pair, and add a simple 'No items in this category' empty state, without inventing new colors beyond the tokens already distilled.",
+      "blocking": false
+    },
+    {
+      "id": "header-eta-green-span",
+      "topic": "Header 'Estimated delivery: 30 mins' partial coloring",
+      "detail": "The rendered PNG shows '30 mins' in a green accent within the otherwise white 'Estimated delivery:' label, but the Figma text node (13:19) is a single TEXT node with one uniform white fill and no color-run/segment data distinguishing '30 mins' from the rest of the string.",
+      "arc_assumption": "Split the string in code into a static label plus a dynamic value span, and style the value span with the same green used for category tags (#2A7043), since that's the only green token in the palette and matches the PNG by eye.",
+      "blocking": false
+    }
+  ]
+}
