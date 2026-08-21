@@ -2,9 +2,9 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { CartProvider, CART_STORAGE_KEY } from "../../../state/CartContext";
-import { SiteHeader } from "../SiteHeader";
+import { CartButton } from "../CartButton";
 
-describe("CartButton via SiteHeader", () => {
+describe("CartButton", () => {
   beforeEach(() => {
     localStorage.clear();
     localStorage.setItem(
@@ -17,14 +17,15 @@ describe("CartButton via SiteHeader", () => {
     localStorage.clear();
   });
 
-  it("renders the cart badge with the count from the cart session", () => {
+  it("links to the cart page and renders the badge with the count from the cart session", () => {
     render(
       <MemoryRouter>
         <CartProvider>
-          <SiteHeader />
+          <CartButton />
         </CartProvider>
       </MemoryRouter>,
     );
+    expect(screen.getByRole("link", { name: /view cart/i })).toHaveAttribute("href", "/cart");
     expect(screen.getByTestId("cart-badge")).toHaveTextContent("3");
   });
 });

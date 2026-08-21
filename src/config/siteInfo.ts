@@ -34,8 +34,8 @@ export const SITE_INFO = {
   legal: {
     copyright: "© 2026 Forno Rosso Pizzeria. All rights reserved.",
     links: [
-      { id: "privacy-policy", label: "Privacy Policy" },
-      { id: "delivery-terms", label: "Delivery Terms" },
+      { id: "privacy-policy", label: "Privacy Policy", to: "/privacy-policy" },
+      { id: "delivery-terms", label: "Delivery Terms", to: "/delivery-terms" },
     ],
   },
 };

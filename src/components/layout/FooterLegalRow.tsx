@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { SITE_INFO } from "../../config/siteInfo";
 
 export function FooterLegalRow() {
@@ -6,9 +7,9 @@ export function FooterLegalRow() {
       <p>{SITE_INFO.legal.copyright}</p>
       <div className="flex items-center gap-6">
         {SITE_INFO.legal.links.map((link) => (
-          <a key={link.id} href="#">
+          <Link key={link.id} to={link.to}>
             {link.label}
-          </a>
+          </Link>
         ))}
       </div>
     </div>

@@ -16,6 +16,7 @@ export function NavLinks({ items }: NavLinksProps) {
           <Link
             key={item.id}
             to={item.to}
+            aria-current={isActive ? "page" : undefined}
             className={`relative font-body font-medium text-base pb-1 ${
               isActive ? "text-brand-red" : "text-white"
             }`}
