@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Figma-mapping review — menu-page</title>
+<style>
+  :root {
+    --bg: #FCFAF6;
+    --surface: #FFFFFF;
+    --border: #EBE7DF;
+    --fg: #151212;
+    --muted: #6B6661;
+    --brand: #C82D25;
+    --accent-green: #2A7043;
+    --dark: #151212;
+    --dark-surface: #201C1C;
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --status-existing: #2A7043;
+    --status-new: #C82D25;
+    --blocking: #C82D25;
+    --nonblocking: #6B6661;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    padding-bottom: 4rem;
+  }
+
+  .review-banner {
+    background: var(--dark);
+    color: var(--surface);
+    padding: 0.85rem 2rem;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .review-banner strong { color: var(--surface); }
+  .review-banner span.tag {
+    background: var(--brand);
+    color: var(--surface);
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    margin: 0 0 0.25rem;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin: 2.5rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--border);
+  }
+  h3 {
+    font-size: 1.05rem;
+    margin: 1.5rem 0 0.5rem;
+    color: var(--fg);
+  }
+  p.lede { color: var(--muted); margin-top: 0; max-width: 800px; }
+
+  .frame-preview {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+  .frame-preview img {
+    width: 100%;
+    max-width: 900px;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+  .frame-preview figcaption {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0.6rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    font-size: 0.88rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.55rem 0.7rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: var(--bg);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  tr:last-child td { border-bottom: none; }
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--bg);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+  }
+
+  .status-pill {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    color: var(--surface);
+  }
+  .status-existing { background: var(--status-existing); }
+  .status-new { background: var(--status-new); }
+
+  .swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  .swatch .chip {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .token-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .token-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+  }
+  .token-card h4 { margin: 0 0 0.5rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+  .token-card ul { margin: 0; padding-left: 1.1rem; font-size: 0.85rem; }
+
+  .qa-list { display: flex; flex-direction: column; gap: 1rem; }
+  .qa-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--nonblocking);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.2rem;
+  }
+  .qa-item.blocking { border-left-color: var(--blocking); }
+  .qa-item .qa-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .qa-item .qa-head h4 { margin: 0; font-size: 1rem; }
+  .qa-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    color: var(--surface);
+    background: var(--nonblocking);
+    white-space: nowrap;
+  }
+  .qa-badge.blocking { background: var(--blocking); }
+  .qa-item p { margin: 0.5rem 0; font-size: 0.9rem; }
+  .qa-item .assumption {
+    background: var(--bg);
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.85rem;
+  }
+  .qa-item .assumption strong { color: var(--brand); }
+  .qa-options { margin: 0.4rem 0 0; padding-left: 1.2rem; font-size: 0.85rem; }
+  .qa-options li.assumed { font-weight: 600; }
+  .qa-options li.assumed::after { content: " — assumed"; font-weight: 400; color: var(--muted); }
+
+  .excluded-list { font-size: 0.9rem; }
+  .excluded-list li { margin-bottom: 0.4rem; }
+
+  footer.notes {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="review-banner">
+  <div><strong>Figma → component mapping review</strong> — menu-page (node 13:4)</div>
+  <div><span class="tag">Review surface</span> not a prototype — the PNG below is authoritative for visuals; this page documents how arc read the frame.</div>
+</div>
+
+<main>
+  <h1>menu-page mapping review</h1>
+  <p class="lede">
+    Source frame: <code>[REDACTED-FIGMA-FILE-KEY]</code> · node <code>13:4</code> ("menu-page"), 1440×2432.
+    This project is greenfield — no existing UI component catalogue was found, so every mapped component below is
+    <span class="status-pill status-new">proposed new</span>. This page is a readable rendering of
+    <code>design-context.json</code>, produced alongside it; treat the JSON as the source of truth for tooling and
+    this HTML as the human-readable review surface.
+  </p>
+
+  <figure class="frame-preview">
+    <img src="figma-frame.png" alt="Rendered menu-page frame">
+    <figcaption>figma-frame.png — rendered export of the frame. Authoritative for color, spacing and type; the tree/JSON is authoritative for structure.</figcaption>
+  </figure>
+
+  <h2>Artboards found</h2>
+  <table>
+    <thead><tr><th>Node</th><th>Name</th><th>Figma type</th><th>Kind</th><th>Bounds</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>13:4</code></td>
+        <td>menu-page</td>
+        <td>FRAME</td>
+        <td><strong>screen</strong></td>
+        <td>0,0 · 1440×2432</td>
+        <td>Single desktop screen: header, hero, category filters, 3×3 menu grid, floating cart-summary bar, footer. The linked node is one FRAME, not a CANVAS with multiple sibling artboards — there is exactly one screen to review here.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Distilled tokens</h2>
+  <div class="token-grid">
+    <div class="token-card">
+      <h4>Colors</h4>
+      <div class="swatches">
+        <div class="swatch"><span class="chip" style="background:var(--brand)"></span><code>--brand</code> #C82D25</div>
+        <div class="swatch"><span class="chip" style="background:var(--fg)"></span><code>--fg</code> #151212</div>
+        <div class="swatch"><span class="chip" style="background:var(--bg)"></span><code>--bg</code> #FCFAF6</div>
+        <div class="swatch"><span class="chip" style="background:var(--surface)"></span><code>--surface</code> #FFFFFF</div>
+        <div class="swatch"><span class="chip" style="background:var(--border)"></span><code>--border</code> #EBE7DF</div>
+        <div class="swatch"><span class="chip" style="background:var(--muted)"></span><code>--muted</code> #6B6661</div>
+        <div class="swatch"><span class="chip" style="background:var(--accent-green)"></span><code>--accent-green</code> #2A7043</div>
+      </div>
+    </div>
+    <div class="token-card">
+      <h4>Type</h4>
+      <ul>
+        <li>Display: <code>Fraunces</code> (SemiBold/Bold) — wordmark, hero title, footer headings</li>
+        <li>Body/UI: <code>Geist</code> (Regular/Medium/SemiBold/Bold) — nav, pills, prices, body copy</li>
+        <li>Sizes seen: 12, 13, 14, 15, 16, 18, 20, 22, 24, 48 px</li>
+      </ul>
+    </div>
+    <div class="token-card">
+      <h4>Radii</h4>
+      <ul>
+        <li>Logo badge: 20px</li>
+        <li>Filter pill: 8px</li>
+        <li>Menu card / cart-summary bar: 16px</li>
+        <li>Cart icon button: 24px (circular)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Component map — by artboard</h2>
+  <h3>menu-page (13:4)</h3>
+  <table>
+    <thead>
+      <tr><th>Figma node</th><th>Code component</th><th>Status</th><th>Props</th><th>Notes</th></tr>
+    </thead>
+    <tbody id="component-map-body">
+    </tbody>
+  </table>
+
+  <h2>Excluded (device chrome / scaffolding)</h2>
+  <ul class="excluded-list">
+    <li><strong>None found.</strong> No status bar, notch, home indicator, keyboard, or simulated browser chrome exists anywhere in the tree — this is a plain 1440×2432 desktop web frame with no device bezel. Listed explicitly to confirm this was checked, not missed.</li>
+  </ul>
+
+  <h2>Open questions</h2>
+  <div class="qa-list" id="qa-list"></div>
+
+  <footer class="notes">
+    Generated from <code>figma-frame.json</code>, <code>figma-assets.json</code> and <code>figma-frame.png</code>. See <code>design-context.json</code> in this same directory for the machine-readable version of everything on this page.
+  </footer>
+</main>
+
+<script>
+const componentMap = [
+  { node: "13:5", component: "SiteHeader", status: "proposed_new", props: {cartCount:3, eta:"30 mins", activeNavItem:"Our Menu"}, notes: "Fixed/top header bar composing LogoMark, NavLinks, and CartButton." },
+  { node: "13:7", component: "LogoMark", status: "proposed_new", props: {letter:"F", variant:"badge"}, notes: "Red rounded-square badge; reused identically in footer (13:203)." },
+  { node: "13:9", component: "SiteWordmark", status: "proposed_new", props: {text:"Forno Rosso", size:"header"}, notes: "Fraunces SemiBold 24px, white on dark. Reused at 22px in footer (13:205)." },
+  { node: "13:10", component: "NavLinks", status: "proposed_new", props: {items:["Home","Our Menu","Cart"], active:"Our Menu"}, notes: "Active item is brand-red with 2px underline; inactive items white Geist Medium." },
+  { node: "13:18", component: "HeaderCartControl", status: "proposed_new", props: {eta:"Estimated delivery: 30 mins", cartCount:3}, notes: "Groups ETA text with CartButton (13:20)." },
+  { node: "13:20", component: "CartButton", status: "proposed_new", props: {count:3, icon:"shopping-cart"}, notes: "Circular translucent-white button, 24px radius, cart glyph + count badge. Icon is inline SVG, not an exported asset." },
+  { node: "13:24", component: "PageHero", status: "proposed_new", props: {title:"Browse Our Oven Menu", subtitle:"Every order is fired individually and packed inside heated thermal backpacks to guarantee your pizza arrives fresh."}, notes: "Centered hero on cream background." },
+  { node: "13:27", component: "CategoryFilterRow", status: "proposed_new", props: {categories:["All","Classic","Specialty","Vegetarian","Sides & Drinks"], active:"All"}, notes: "Composes CategoryFilterPill per category." },
+  { node: "13:29", component: "CategoryFilterPill", status: "proposed_new", props: {label:"All", active:true}, notes: "Active: brand-red fill, white text, 8px radius." },
+  { node: "13:31", component: "CategoryFilterPill", status: "proposed_new", props: {label:"Classic", active:false}, notes: "Reuses CategoryFilterPill proposed at 13:29. Inactive: no fill, muted text." },
+  { node: "13:33", component: "CategoryFilterPill", status: "proposed_new", props: {label:"Specialty", active:false}, notes: "Reuses CategoryFilterPill proposed at 13:29." },
+  { node: "13:35", component: "CategoryFilterPill", status: "proposed_new", props: {label:"Vegetarian", active:false}, notes: "Reuses CategoryFilterPill proposed at 13:29." },
+  { node: "13:37", component: "CategoryFilterPill", status: "proposed_new", props: {label:"Sides & Drinks", active:false}, notes: "Reuses CategoryFilterPill proposed at 13:29." },
+  { node: "13:39", component: "MenuGrid", status: "proposed_new", props: {columns:3, itemCount:9}, notes: "3×3 grid of MenuItemCard." },
+  { node: "13:41", component: "MenuItemCard", status: "proposed_new", props: {name:"Classic Margherita", category:"Classic", price:"$14.50", description:"San Marzano sauce, fresh buffalo mozzarella, fresh basil, extra virgin olive oil."}, notes: "White card, 16px radius, 1px border. Composes MenuItemImage (13:43, asset=figma-asset-13-43-menu-grid.png, object-fit=cover), title/category/price, description, AddToCartButton (13:52)." },
+  { node: "13:43", component: "MenuItemImage", status: "proposed_new", props: {alt:"Classic Margherita"}, notes: "asset=figma-asset-13-43-menu-grid.png, css_object_fit=cover." },
+  { node: "13:52", component: "AddToCartButton", status: "proposed_new", props: {label:"Add to Cart", icon:"shopping-cart"}, notes: "Full-width dark button, repeated on every card." },
+  { node: "13:57", component: "MenuItemCard", status: "proposed_new", props: {name:"Diavola", category:"Specialty", price:"$16.50", description:"Spicy calabrian salami, fresh mozzarella, tomato base, organic chili oil, fresh basil."}, notes: "Reuses MenuItemCard proposed at 13:41. Image asset: figma-asset-13-59-menu-grid.png (node 13:59)." },
+  { node: "13:73", component: "MenuItemCard", status: "proposed_new", props: {name:"Funghi e Tartufo", category:"Specialty", price:"$18.00", description:"Wild porcini and cremini mushrooms, truffle-infused olive oil, white mozzarella base."}, notes: "Reuses MenuItemCard proposed at 13:41. Image asset: figma-asset-13-75-menu-grid.png (node 13:75)." },
+  { node: "13:90", component: "MenuItemCard", status: "proposed_new", props: {name:"Prosciutto e Rucola", category:"Specialty", price:"$19.00", description:"Prosciutto di Parma, wild arugula, shaved parmigiano-reggiano, sweet balsamic glaze."}, notes: "Reuses MenuItemCard proposed at 13:41. Image asset: figma-asset-13-92-menu-grid.png (node 13:92)." },
+  { node: "13:106", component: "MenuItemCard", status: "proposed_new", props: {name:"Quattro Formaggi", category:"Classic", price:"$16.00", description:"Buffalo mozzarella, gorgonzola dolce, fresh ricotta, aged parmigiano-reggiano."}, notes: "Reuses MenuItemCard proposed at 13:41. Image asset: figma-asset-13-108-menu-grid.png (node 13:108)." },
+  { node: "13:122", component: "MenuItemCard", status: "proposed_new", props: {name:"Verdure Grigliate", category:"Vegetarian", price:"$15.00", description:"Grilled bell peppers, eggplant, roasted zucchini, marinated cherry tomatoes, herb pesto."}, notes: "Reuses MenuItemCard proposed at 13:41. Image asset: figma-asset-13-124-menu-grid.png (node 13:124)." },
+  { node: "13:139", component: "MenuItemCard", status: "proposed_new", props: {name:"Calzone Rosso", category:"Classic", price:"$17.00", description:"Folded sourdough stuffed with ricotta, spicy salami, crushed tomatoes, fresh mozzarella."}, notes: "Reuses MenuItemCard proposed at 13:41. Image asset: figma-asset-13-141-menu-grid.png (node 13:141)." },
+  { node: "13:155", component: "MenuItemCard", status: "proposed_new", props: {name:"Rosemary Garlic Focaccia", category:"Sides & Drinks", price:"$8.50", description:"Fresh baked warm sourdough focaccia, woodfired rosemary, garlic salt, olive oil."}, notes: "Reuses MenuItemCard proposed at 13:41. Image asset: figma-asset-13-157-menu-grid.png (node 13:157)." },
+  { node: "13:171", component: "MenuItemCard", status: "proposed_new", props: {name:"Tiramisu della Casa", category:"Sides & Drinks", price:"$9.00", description:"Traditional espresso-soaked ladyfingers, whipped farm mascarpone, pure cocoa dust."}, notes: "Reuses MenuItemCard proposed at 13:41. Image asset: figma-asset-13-173-menu-grid.png (node 13:173). Dessert filed under 'Sides & Drinks' — see open question." },
+  { node: "13:187", component: "CartSummaryBar", status: "proposed_new", props: {itemLabel:"3 Pizzas selected", total:"$53.50", ctaLabel:"Checkout"}, notes: "Dark rounded floating bar. Positioned behind the footer in the flat frame (not visible in the PNG at its literal y) — assumed to be a fixed/sticky bottom bar. See blocking open question." },
+  { node: "13:199", component: "SiteFooter", status: "proposed_new", props: {}, notes: "Composes FooterBrandColumn, FooterInfoColumn ×2, FooterDivider, FooterLegalRow." },
+  { node: "13:201", component: "FooterBrandColumn", status: "proposed_new", props: {tagline:"Artisanal wood-fired sourdough pizzas crafted with 48-hour fermented dough and imported San Marzano ingredients. Delivered fresh and piping hot."}, notes: "Reuses LogoMark/SiteWordmark at footer scale, plus SocialIconRow (13:207)." },
+  { node: "13:207", component: "SocialIconRow", status: "proposed_new", props: {icons:["instagram","facebook","twitter"]}, notes: "Circular translucent-white icon buttons; inline SVGs, no exported bitmap assets." },
+  { node: "13:217", component: "FooterInfoColumn", status: "proposed_new", props: {heading:"Kitchen Hours", rows:[{label:"Monday - Thursday",value:"12:00 PM - 10:00 PM"},{label:"Friday - Saturday",value:"12:00 PM - 11:30 PM"},{label:"Sunday",value:"1:00 PM - 9:30 PM"}]}, notes: "Uppercase Fraunces heading + stacked label/value rows." },
+  { node: "13:229", component: "FooterInfoColumn", status: "proposed_new", props: {heading:"Pizzeria Location", address:"842 Rione Monti, Sourdough Avenue, Suite 100", phoneLabel:"Delivery: (555) 392-7677", emailLabel:"Email: ciao@fornorosso.pizza"}, notes: "Reuses FooterInfoColumn proposed at 13:217 with a free-text body slot." },
+  { node: "13:236", component: "FooterDivider", status: "proposed_new", props: {}, notes: "1px hairline, 12% opacity white." },
+  { node: "13:237", component: "FooterLegalRow", status: "proposed_new", props: {copyright:"© 2026 Forno Rosso Pizzeria. All rights reserved.", links:["Privacy Policy","Delivery Terms"]}, notes: "Copyright + two legal links, 60% opacity white." }
+];
+
+const tbody = document.getElementById('component-map-body');
+for (const row of componentMap) {
+  const tr = document.createElement('tr');
+  const statusClass = row.status === 'existing' ? 'status-existing' : 'status-new';
+  const statusLabel = row.status === 'existing' ? 'existing' : 'proposed new';
+  tr.innerHTML = `
+    <td><code>${row.node}</code></td>
+    <td><code>${row.component}</code></td>
+    <td><span class="status-pill ${statusClass}">${statusLabel}</span></td>
+    <td><code>${JSON.stringify(row.props)}</code></td>
+    <td>${row.notes}</td>
+  `;
+  tbody.appendChild(tr);
+}
+
+const openQuestions = [
+  {
+    id: "sticky-cart-bar-behavior",
+    topic: "CartSummaryBar (13:187) positioning",
+    detail: "The cart-summary node sits at y=2216, painted BEHIND the footer (footer starts at y=1956, is a later/higher-z sibling), so it is invisible in the rendered PNG at its literal Figma coordinates — confirmed by sampling that pixel region, which shows plain footer background.",
+    assumption: "Implement as a fixed-position bar pinned to the viewport bottom, shown whenever the cart has at least one item.",
+    blocking: true,
+    options: [
+      { id: "fixed-viewport-bottom", label: "Fixed to viewport bottom while cart has items — matches typical checkout-bar UX", assumed: true },
+      { id: "static-in-flow", label: "Static, in-flow element at its literal Figma position — reproduces the frame literally but would stay hidden behind the footer", assumed: false }
+    ]
+  },
+  {
+    id: "category-tag-color-mapping",
+    topic: "MenuItemCard category tag color",
+    detail: "Every category tag observed (Classic, Specialty, Vegetarian, Sides & Drinks) renders in the same green (#2A7043) — no per-category color variation exists in this frame.",
+    assumption: "Treat the category tag as a single flat style applied to all categories, not a category→color lookup table.",
+    blocking: false
+  },
+  {
+    id: "tiramisu-category",
+    topic: "Tiramisu della Casa filed under 'Sides & Drinks'",
+    detail: "The dessert 'Tiramisu della Casa' is tagged 'Sides & Drinks' rather than a dedicated 'Desserts' category, but this is consistent with the filter row, which only offers All/Classic/Specialty/Vegetarian/Sides & Drinks.",
+    assumption: "Keep the content as authored; not treated as a build defect.",
+    blocking: false
+  },
+  {
+    id: "filter-interaction-states",
+    topic: "CategoryFilterPill hover/focus/disabled + empty states",
+    detail: "Only one active pill and four at-rest inactive pills are drawn — no hover, focus-visible, disabled, or zero-results empty state exists anywhere in the frame.",
+    assumption: "Implement standard hover/focus affordances from the existing inactive/active token pair, and add a simple 'No items in this category' empty state, without inventing new colors.",
+    blocking: false
+  },
+  {
+    id: "header-eta-green-span",
+    topic: "Header 'Estimated delivery: 30 mins' partial coloring",
+    detail: "The rendered PNG shows '30 mins' in green within an otherwise white label, but the Figma text node (13:19) is a single TEXT node with one uniform white fill and no per-run color data.",
+    assumption: "Split the string into a static label + dynamic value span in code, styling the value span with the same green used for category tags.",
+    blocking: false
+  }
+];
+
+const qaList = document.getElementById('qa-list');
+const sorted = [...openQuestions].sort((a,b) => (b.blocking - a.blocking));
+for (const q of sorted) {
+  const div = document.createElement('div');
+  div.className = 'qa-item' + (q.blocking ? ' blocking' : '');
+  let optionsHtml = '';
+  if (q.options) {
+    optionsHtml = '<ul class="qa-options">' + q.options.map(o =>
+      `<li class="${o.assumed ? 'assumed' : ''}"><code>${o.id}</code> — ${o.label}</li>`
+    ).join('') + '</ul>';
+  }
+  div.innerHTML = `
+    <div class="qa-head">
+      <h4>${q.topic}</h4>
+      <span class="qa-badge ${q.blocking ? 'blocking' : ''}">${q.blocking ? 'Blocking' : 'Non-blocking'}</span>
+    </div>
+    <p>${q.detail}</p>
+    <div class="assumption"><strong>arc's assumption:</strong> ${q.assumption}</div>
+    ${optionsHtml}
+  `;
+  qaList.appendChild(div);
+}
+</script>
+</body>
+</html>
+
+<!-- arc:css-inlined -->
